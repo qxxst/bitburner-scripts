@@ -1,5 +1,5 @@
 // milestones.js by qxxst
-import * as util from 'lib/util.js';
+import * as util from 'lib/util';
 /** @param {NS} ns */
 export async function main(ns) {
     const hackingLevel = await ns.getHackingLevel(); // The player's current hacking level.

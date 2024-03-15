@@ -1,5 +1,5 @@
 // companies.js by qxxst
-import {factionAugsRemaining} from 'lib/util.js';
+import {factionAugsRemaining} from 'lib/util';
 /** @param {NS} ns */
 export async function main(ns: any) {
     function checkCompanyFaction(faction: string) {
