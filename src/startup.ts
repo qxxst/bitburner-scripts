@@ -1,7 +1,7 @@
 // startup.js by qxxst
 import {sourceFileOwned, currentBitnode, getPorts} from 'lib/util.js';
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: any) {
     // SETTINGS
     // BitNodes to avoid using hacknet.js in.
     // Hacknet nodes do not work in BN 8 and have questionable returns on investment in others.
@@ -82,7 +82,7 @@ export async function main(ns) {
     const serversUpTo4Port = serversUpTo3Port.concat(servers4Port);
     const serversUpTo5Port = serversUpTo4Port.concat(servers5Port);
 
-    function cancel(array, script) {
+    function cancel(array: string[], script: string) {
         var i = 0;
         while (i < array.length) {
             ns.scriptKill(script, array[i]);
