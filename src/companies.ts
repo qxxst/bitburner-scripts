@@ -1,8 +1,8 @@
 // companies.js by qxxst
 import {factionAugsRemaining} from 'lib/util.js';
 /** @param {NS} ns */
-export async function main(ns) {
-    function checkCompanyFaction(faction) {
+export async function main(ns: any) {
+    function checkCompanyFaction(faction: string) {
         // Joining company factions is hard, so let's only encourage it if we still need Augmentations from them.
         if (factionAugsRemaining(ns,faction) > 0) {
             if (ns.getPlayer().factions.includes(faction)) {
