@@ -1,7 +1,7 @@
 // singularity.js by qxxst
-import {factionAugsRemaining} from 'lib/util.js';
+import {factionAugsRemaining} from 'lib/util';
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: any) {
     // SETTINGS
     // Whether or not the script should stay on after completing all tasks
     const stayOn = true;
