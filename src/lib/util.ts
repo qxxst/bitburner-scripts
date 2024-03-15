@@ -69,11 +69,7 @@ export function nextMilestone(ns: any) {
         if (hackingLevel < highestMilestone) {
             return nextMilestone;
         } else {
-            if (hackingLevel >= pre26wd) {
-                return "None :)";
-            } else {
-                return pre26wd;
-            }
+            return "None :)";
         }
     } else {
         highestMilestone = Math.max(...combatMilestoneLevels);
@@ -81,11 +77,7 @@ export function nextMilestone(ns: any) {
         if (lowestCombatLevel(ns) < highestMilestone) {
             return nextMilestone;
         } else {
-            if (hackingLevel >= pre26wd) {
-                return "None :)";
-            } else {
-                return pre26wd;
-            }
+            return "None :)";
         }
     }
 }
