@@ -1,6 +1,6 @@
 // scp/drain.js by qxxst
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: any) {
 	const target = ns.args[0];
 	const minSecurityLevel = ns.getServerMinSecurityLevel(target);
 	const maxMoney = ns.getServerMaxMoney(target);
