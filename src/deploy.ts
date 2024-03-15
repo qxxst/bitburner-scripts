@@ -1,6 +1,6 @@
 // deploy.js by qxxst
 /** @param {NS} ns **/
-export async function main(ns) {
+export async function main(ns: any) {
 	const host = ns.args[0];
 	const script = "scp/drain.js";
     const home = "home";
@@ -10,7 +10,7 @@ export async function main(ns) {
 		ns.tprint(`Server '${host}' does not exist. Aborting.`);
 		return;
 	}
-	if (!ns.ls(ns.getHostname()).find(f => f === script)) {
+	if (!ns.ls(ns.getHostname()).find((f: string) => f === script)) {
 		ns.tprint(`Script '${script}' does not exist. Aborting.`);
 		return;
 	}
