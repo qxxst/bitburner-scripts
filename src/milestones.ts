@@ -10,7 +10,7 @@ export async function main(ns) {
     const kills = ns.getPlayer().numPeopleKilled;
     const augs = ns.getResetInfo().ownedAugs.size;
 
-    function checkFaction(faction) {
+    function checkFaction(faction: string) {
         if (ns.getPlayer().factions.includes(faction)) {
             ns.tprint(`[x] You have already joined ${faction}.`);
             return
@@ -136,7 +136,7 @@ export async function main(ns) {
         }
     }
 
-    function checkServer(server, requiredPorts) {
+    function checkServer(server: string, requiredPorts: number) {
         if (ns.serverExists(server)) {
             let canHack = null;
             let noHackReason = null;
