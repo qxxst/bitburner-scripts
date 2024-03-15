@@ -1,5 +1,5 @@
 // lib/util.js by qxxst
-export function lowestCombatLevel(ns) {
+export function lowestCombatLevel(ns: any) {
     let str = ns.getPlayer().skills.strength;
     let def = ns.getPlayer().skills.defense;
     let dex = ns.getPlayer().skills.dexterity;
@@ -7,15 +7,15 @@ export function lowestCombatLevel(ns) {
     return Math.min(str, def, dex, agi);
 }
 
-export function sourceFileOwned(ns, sourceFile, level) {
+export function sourceFileOwned(ns: any, sourceFile: number, level: number) {
     return ns.getResetInfo().ownedSF.has(sourceFile) && ns.getResetInfo().ownedSF.get(sourceFile) >= level;
 }
 
-export function currentBitnode(ns) {
+export function currentBitnode(ns: any) {
     return ns.getResetInfo().currentNode;
 }
 
-export function grossIncomePerSecond(ns) {
+export function grossIncomePerSecond(ns: any) {
     let allSources = ns.getMoneySources().sinceInstall;
     let income1 = allSources.crime + allSources.hacking + allSources.hacknet + allSources.work;
     ns.sleep(1000);
@@ -23,7 +23,7 @@ export function grossIncomePerSecond(ns) {
     return income2 - income1;
 }
 
-export function getPorts(ns) {
+export function getPorts(ns: any) {
     let ports = 0;
     if (ns.fileExists("BruteSSH.exe", "home")) {
         ports = ports + 1;
@@ -43,7 +43,7 @@ export function getPorts(ns) {
     return ports
 }
 
-export function inferredDaedalusRoute(ns) {
+export function inferredDaedalusRoute(ns: any) {
     let hackingLevel = ns.getHackingLevel();
     let inferredRoute = null;
     if (lowestCombatLevel(ns) > hackingLevel) {
@@ -56,7 +56,7 @@ export function inferredDaedalusRoute(ns) {
     return inferredRoute;
 }
 
-export function nextMilestone(ns) {
+export function nextMilestone(ns: any) {
     let hackingLevel = ns.getHackingLevel();
     let hackingMilestoneLevels = [ns.getServer("CSEC").requiredHackingSkill, ns.getServer("avmnite-02h").requiredHackingSkill, ns.getServer("I.I.I.I").requiredHackingSkill, ns.getServer("run4theh111z").requiredHackingSkill, 2500, ns.getServer("w0r1d_d43mon").requiredHackingSkill];
     let combatMilestoneLevels = [30, 75, 200, 300, 850, 1200, 1500];
@@ -90,7 +90,7 @@ export function nextMilestone(ns) {
     }
 }
 
-export function factionAugsRemaining(ns, faction) {
+export function factionAugsRemaining(ns: any, faction: string) {
     let augsRemaining = 0;
     for (let i = 0; i < ns.singularity.getAugmentationsFromFaction(faction).length; i++) {
         if (!ns.singularity.getOwnedAugmentations().includes(ns.singularity.getAugmentationsFromFaction(faction)[i])) {
@@ -100,7 +100,7 @@ export function factionAugsRemaining(ns, faction) {
     return augsRemaining;
 }
 
-export function donationsUnlocked(ns, faction) {
+export function donationsUnlocked(ns: any, faction: string) {
     let favorRequirement = 150;
 
     if (currentBitnode(ns) == 3) {
