@@ -1,8 +1,8 @@
 // nuke.js by qxxst
-import {sourceFileOwned, currentBitnode} from 'lib/util.js';
-import { Scanner } from "lib/scan.js";
+import {sourceFileOwned, currentBitnode} from 'lib/util';
+import { Scanner } from "lib/scan";
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: any) {
 	const target = ns.args[0];
     const factionServers = ["CSEC", "avmnite-02h", "I.I.I.I", "run4theh111z"];
 
