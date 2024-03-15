@@ -2,7 +2,7 @@
 /** @param {NS} ns */
 /* Used for the "Big trouble" achievement */
 /* Run after installing augmentations */
-export async function main(ns) {
+export async function main(ns: any) {
 	const target = 'n00dles'
 	const minSecurityLevel = await ns.getServerMinSecurityLevel(target)
 	while (true) {
