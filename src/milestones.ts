@@ -1,7 +1,7 @@
 // milestones.js by qxxst
 import * as util from 'lib/util';
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: any) {
     const hackingLevel = await ns.getHackingLevel(); // The player's current hacking level.
     const lowestCombatLevel = util.lowestCombatLevel(ns); // The player's lowest combat level.
     const karma = ns.heart.break();
