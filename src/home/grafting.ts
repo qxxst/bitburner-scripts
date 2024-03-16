@@ -24,6 +24,8 @@ export async function main(ns: any) {
     }
 
     for (let aug of graftableAugs) {
+        check();
+
         ns.grafting.graftAugmentation(aug, actuallyFocus);
 
         while (ns.singularity.getCurrentWork() !== null) {
