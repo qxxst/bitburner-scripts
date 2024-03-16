@@ -5,9 +5,14 @@ export async function main(ns: any) {
     const focus: boolean = true; // Whether or not you want the grafting task to be focused on. This makes it go faster but prevents you from doing other things while it's working.
     const filter: string | null = "hack"; // The type of augs we specificaly want to graft. Set to null to graft everything.
     const prioritizeNickfolas: boolean = true; // Whether you want to put down the Entropy virus first.
+    const logSleep: boolean = false; // Whether or not the sleep function should be logged.
 
     // Constants
     const nickofolas: string = "nickofolas Congruity Implant";
+
+    if (logSleep == false) {
+        ns.disableLog("sleep");
+    }
 
     let currentCity: string = ns.getPlayer().location;
     if (currentCity !== "New Tokyo") {
