@@ -44,7 +44,7 @@ export async function main(ns: any) {
         await check();
         await waitUntilNotGrafting();
 
-        if (prioritizeNickfolas && !!ownedAugmentations.includes(nickofolas)) {
+        if (prioritizeNickfolas && !ownedAugmentations.includes(nickofolas)) {
             await ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
         } else {
             await ns.grafting.graftAugmentation(aug, actuallyFocus);
