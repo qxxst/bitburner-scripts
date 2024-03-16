@@ -3,7 +3,6 @@
 export async function main(ns: any) {
     // Settings
     const focus: boolean = true;
-    const cooldown: number = 1000;
 
     let currentCity: string = ns.getPlayer().location;
     if (currentCity !== "New Tokyo") {
@@ -22,12 +21,12 @@ export async function main(ns: any) {
     }
 
     for (let aug of graftableAugs) {
-        let time: number = ns.grafting.getAugmentationGraftTime(aug);
-
         ns.grafting.graftAugmentation(aug, focus);
 
-        await ns.sleep(time + cooldown);
-        
+        while (ns.singularity.getCurrentWork() !== null) {
+            await ns.sleep(1000);
+        }
+
         check();
     }
 }
