@@ -32,7 +32,7 @@ export async function main(ns: any) {
         ns.disableLog("sleep");
     }
 
-    function resetTarget() {
+    function resetTarget(): void {
         optimizedTarget = "foodnstuff";
         targetThreshold = ns.getServerMaxMoney(optimizedTarget);
     }
@@ -82,7 +82,7 @@ export async function main(ns: any) {
     const serversUpTo4Port: readonly string[] = serversUpTo3Port.concat(servers4Port);
     const serversUpTo5Port: readonly string[] = serversUpTo4Port.concat(servers5Port);
 
-    function cancel(array: readonly string[], script: string) {
+    function cancel(array: readonly string[], script: string): void {
         var i = 0;
         while (i < array.length) {
             ns.scriptKill(script, array[i]);
@@ -91,7 +91,7 @@ export async function main(ns: any) {
         }
     }
 
-    function cancelAll() {
+    function cancelAll(): void {
         cancel(servers0Port, deployScript);
         cancel(servers1Port, deployScript);
         cancel(servers2Port, deployScript);
@@ -105,7 +105,7 @@ export async function main(ns: any) {
         cancel(serversUpTo5Port, script);
     }
 
-    function getTarget() {
+    function getTarget(): void {
         resetTarget();
         var i = 0;
         while (i < servers0Port.length) {

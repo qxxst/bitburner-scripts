@@ -1,5 +1,5 @@
 // lib/util.js by qxxst
-export function lowestCombatLevel(ns: any) {
+export function lowestCombatLevel(ns: any): number {
     let str: number = ns.getPlayer().skills.strength;
     let def: number = ns.getPlayer().skills.defense;
     let dex: number = ns.getPlayer().skills.dexterity;
@@ -7,15 +7,15 @@ export function lowestCombatLevel(ns: any) {
     return Math.min(str, def, dex, agi);
 }
 
-export function sourceFileOwned(ns: any, sourceFile: number, level: number) {
+export function sourceFileOwned(ns: any, sourceFile: number, level: number): boolean {
     return ns.getResetInfo().ownedSF.has(sourceFile) && ns.getResetInfo().ownedSF.get(sourceFile) >= level;
 }
 
-export function currentBitnode(ns: any) {
+export function currentBitnode(ns: any): number {
     return ns.getResetInfo().currentNode;
 }
 
-export function grossIncomePerSecond(ns: any) {
+export function grossIncomePerSecond(ns: any): number {
     let allSources: {crime: number, hacking: number, hacknet: number, work: number} = ns.getMoneySources().sinceInstall;
     let income1: number = allSources.crime + allSources.hacking + allSources.hacknet + allSources.work;
     ns.sleep(1000);
@@ -23,7 +23,7 @@ export function grossIncomePerSecond(ns: any) {
     return income2 - income1;
 }
 
-export function getPorts(ns: any) {
+export function getPorts(ns: any): number {
     let ports: number = 0;
     if (ns.fileExists("BruteSSH.exe", "home")) {
         ports = ports + 1;
@@ -43,7 +43,7 @@ export function getPorts(ns: any) {
     return ports
 }
 
-export function inferredDaedalusRoute(ns: any) {
+export function inferredDaedalusRoute(ns: any): string | null {
     let hackingLevel: number = ns.getHackingLevel();
     let inferredRoute: string | null = null;
     if (lowestCombatLevel(ns) > hackingLevel) {
@@ -56,7 +56,7 @@ export function inferredDaedalusRoute(ns: any) {
     return inferredRoute;
 }
 
-export function nextMilestone(ns: any) {
+export function nextMilestone(ns: any): string | number {
     let hackingLevel: number = ns.getHackingLevel();
     let hackingMilestoneLevels: number[] = [ns.getServer("CSEC").requiredHackingSkill, ns.getServer("avmnite-02h").requiredHackingSkill, ns.getServer("I.I.I.I").requiredHackingSkill, ns.getServer("run4theh111z").requiredHackingSkill, 2500, ns.getServer("w0r1d_d43mon").requiredHackingSkill];
     let combatMilestoneLevels: number[] = [30, 75, 200, 300, 850, 1200, 1500];
@@ -82,7 +82,7 @@ export function nextMilestone(ns: any) {
     }
 }
 
-export function factionAugsRemaining(ns: any, faction: string) {
+export function factionAugsRemaining(ns: any, faction: string): number {
     let augsRemaining: number = 0;
     for (let i = 0; i < ns.singularity.getAugmentationsFromFaction(faction).length; i++) {
         if (!ns.singularity.getOwnedAugmentations().includes(ns.singularity.getAugmentationsFromFaction(faction)[i])) {
@@ -92,7 +92,7 @@ export function factionAugsRemaining(ns: any, faction: string) {
     return augsRemaining;
 }
 
-export function donationsUnlocked(ns: any, faction: string) {
+export function donationsUnlocked(ns: any, faction: string): boolean {
     let favorRequirement: number = 150;
 
     if (currentBitnode(ns) == 3) {

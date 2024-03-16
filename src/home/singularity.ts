@@ -44,7 +44,7 @@ export async function main(ns: any) {
     ns.scriptKill("tix.js", home);
     ns.scriptKill("combatgang.js", home);
 
-    async function idleTasks() {
+    async function idleTasks(): Promise<void> {
         if (ns.getPlayer().money > torPrice && ns.hasTorRouter() == false) {
             ns.singularity.purchaseTor();
         }

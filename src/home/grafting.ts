@@ -15,7 +15,7 @@ export async function main(ns: any) {
     graftableAugs = ns.grafting.getGraftableAugmentations();
     
     augsRemaining = graftableAugs.length;
-    function check() {
+    function check(): void {
         graftableAugs = ns.grafting.getGraftableAugmentations();
         augsRemaining = graftableAugs.length;
     }

@@ -2,7 +2,7 @@
 import {factionAugsRemaining} from 'lib/util';
 /** @param {NS} ns */
 export async function main(ns: any) {
-    function checkCompanyFaction(faction: string) {
+    function checkCompanyFaction(faction: string): void {
         // Joining company factions is hard, so let's only encourage it if we still need Augmentations from them.
         if (factionAugsRemaining(ns,faction) > 0) {
             if (ns.getPlayer().factions.includes(faction)) {
