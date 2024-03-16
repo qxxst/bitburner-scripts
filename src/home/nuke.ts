@@ -24,10 +24,10 @@ export async function main(ns: any) {
     
     ns.nuke(target);
     if (sourceFileOwned(ns, 4, 1) || currentBitnode(ns) == 4) {
-        let route_list = Scanner.route(ns, target, true);
+        let route_list: any = Scanner.route(ns, target, true);
         try {
             if (route_list) {
-                let first_stop = route_list.shift(); // pop home off
+                let first_stop: any = route_list.shift(); // pop home off
                 if (first_stop && first_stop != "home") {
                     route_list.unshift(first_stop);
                 }

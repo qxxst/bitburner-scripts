@@ -9,10 +9,10 @@ export async function main(ns: any) {
                 ns.tprint(`[x] You have already joined ${faction}. You still need to install ${factionAugsRemaining(ns,faction)} Augmentations from them.`);
                 return
             } else {
-                let repRequirement = 400000;
-                let backdoorRequirement = false;
-                let associatedServer = null;
-                let company = faction;
+                let repRequirement: number = 400000;
+                let backdoorRequirement: boolean = false;
+                let associatedServer: string | null = null;
+                let company: string = faction;
                 if (faction =="Fulcrum Secret Technologies") {
                     backdoorRequirement = true;
                     associatedServer = "fulcrumassets";
