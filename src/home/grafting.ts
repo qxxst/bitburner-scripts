@@ -11,10 +11,8 @@ export async function main(ns: any) {
         currentCity = "New Tokyo";
     }
 
-    let graftableAugs: string[];
-    let augsRemaining: number;
-    graftableAugs = ns.grafting.getGraftableAugmentations();
-    augsRemaining = graftableAugs.length;
+    let graftableAugs: string[] = ns.grafting.getGraftableAugmentations();
+    let augsRemaining: number = graftableAugs.length;
 
     function check(): void {
         graftableAugs = ns.grafting.getGraftableAugmentations();
