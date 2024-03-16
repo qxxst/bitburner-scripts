@@ -3,12 +3,14 @@
 export async function main(ns: any) {
     // Settings
     const focus: boolean = true; // Whether or not you want the grafting task to be focused on. This makes it go faster but prevents you from doing other things while it's working.
-    const filter: string | null = "hack"; // The type of augs we specificaly want to graft. Set to null to graft everything.
+    const filter: string | null = "hack"; // The type of augs we specificaly want to graft. Set to hack or combat, or set to null to graft everything.
     const prioritizeNickfolas: boolean = true; // Whether you want to put down the Entropy virus first.
     const logSleep: boolean = false; // Whether or not the sleep function should be logged.
 
     // Constants
     const nickofolas: string = "nickofolas Congruity Implant";
+    const hackingRelatedMultipliers: string[] = ["hacking_chance", "hacking_exp", "hacking_grow", "hacking_money", "hacking_speed", "hacking"];
+    const combatRelatedMultipliers: string[] = ["agility_exp", "agility", "defense_exp", "defense", "dexterity_exp", "dexterity", "strength_exp", "strength"];
 
     if (logSleep == false) {
         ns.disableLog("sleep");
@@ -44,13 +46,52 @@ export async function main(ns: any) {
         await check();
         await waitUntilNotGrafting();
 
+        /* let relevant: boolean = true;
+
+        if (prioritizeNickfolas && !ownedAugmentations.includes(nickofolas)) {
+        relevant = true;
+        } else {
+            if (filter !== null) {
+                let augMultipliers: any = await ns.singularity.getAugmentationStats(aug);
+                let currentMultiplier: any;
+                let propertyName: string;
+
+                if (filter === "hack") {
+                    for (let mult of hackingRelatedMultipliers) {
+                        propertyName = hackingRelatedMultipliers[mult];
+                        currentMultiplier = augMultipliers[propertyName];
+                        ns.print(currentMultiplier);
+
+                        if (currentMultiplier > 1.00) {
+                            relevant = true;
+                        }
+                    }
+                }
+                if (filter === "combat") {
+                    for (let mult of combatRelatedMultipliers) {
+                        currentMultiplier = augMultipliers.combatRelatedMultipliers[mult];
+                        ns.print(currentMultiplier);
+
+                        if (currentMultiplier > 1.00) {
+                            relevant = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (relevant) {
+            await ns.grafting.graftAugmentation(aug, actuallyFocus);
+        } */
+
+        // just use this version for now until I can figure out what I'm doing
         if (prioritizeNickfolas && !ownedAugmentations.includes(nickofolas)) {
             await ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
         } else {
             await ns.grafting.graftAugmentation(aug, actuallyFocus);
         }
-        await waitUntilNotGrafting();
 
+        await waitUntilNotGrafting();
         await check();
     }
 }
