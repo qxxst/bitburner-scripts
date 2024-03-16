@@ -15,9 +15,9 @@ export async function main(ns: any) {
     // Set this to true to avoid buying any RAM or core upgrades. Useful for BN1's challenge.
     const noComputerUpgrades: boolean = false;
     // Factions to automatically accept invites from.
-    const autoJoinFactions: string[] = ["CyberSec", "NiteSec", "The Black Hand", "BitRunners", "Netburners", "Tian Di Hui", "Slum Snakes", "Tetrads", "Speakers for the Dead", "The Dark Army", "The Syndicate", "Daedalus", "The Covenant", "Illuminati", "ECorp", "MegaCorp", "KuaiGong International", "Four Sigma", "NWO", "Blade Industries", "OmniTek Incorporated", "Bachman & Associates", "Clarke Incorporated", "Fulcrum Secret Technologies", "Bladeburners"];
+    const autoJoinFactions: readonly string[] = ["CyberSec", "NiteSec", "The Black Hand", "BitRunners", "Netburners", "Tian Di Hui", "Slum Snakes", "Tetrads", "Speakers for the Dead", "The Dark Army", "The Syndicate", "Daedalus", "The Covenant", "Illuminati", "ECorp", "MegaCorp", "KuaiGong International", "Four Sigma", "NWO", "Blade Industries", "OmniTek Incorporated", "Bachman & Associates", "Clarke Incorporated", "Fulcrum Secret Technologies", "Bladeburners"];
     // Factions to only join if we still need Augmentations from them.
-    const conditionalJoinFactions: {cities: string[]} = {
+    const conditionalJoinFactions: {cities: readonly string[]} = {
         cities: ["Sector-12", "Chongqing", "New Tokyo", "Ishima",  "Aevum", "Volhaven"]
     };
 

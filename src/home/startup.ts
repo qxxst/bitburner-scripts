@@ -69,20 +69,20 @@ export async function main(ns: any) {
 
     // GENERAL STARTUP TASKS
     // Declare lists of servers sorted by how many ports are required to access them
-    const servers0Port: string[] = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi"];
-    const servers1Port: string[] = ["neo-net", "zer0", "max-hardware", "iron-gym", "CSEC"];
-    const servers2Port: string[] = ["phantasy", "omega-net", "silver-helix", "the-hub", "crush-fitness", "avmnite-02h"];
-    const servers3Port: string[] = ["computek", "netlink", "rothman-uni", "catalyst", "summit-uni", "rho-construction", "millenium-fitness", "I.I.I.I"];
-    const servers4Port: string[] = ["syscore", "alpha-ent", "global-pharm", "lexo-corp", "snap-fitness", "univ-energy", "nova-med", "unitalife", "zb-def", "aevum-police", ".", "run4theh111z"];
-    const servers5Port: string[] = ["zb-institute", "galactic-cyber", "deltaone", "taiyang-digital", "aerocorp", "omnia", "icarus", "infocomm", "defcomm", "solaris", "zeus-med", "helios", "omnitek", "powerhouse-fitness", "vitalife", "titan-labs", "microdyne", "blade", "fulcrumtech"];
+    const servers0Port: readonly string[] = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi"];
+    const servers1Port: readonly string[] = ["neo-net", "zer0", "max-hardware", "iron-gym", "CSEC"];
+    const servers2Port: readonly string[] = ["phantasy", "omega-net", "silver-helix", "the-hub", "crush-fitness", "avmnite-02h"];
+    const servers3Port: readonly string[] = ["computek", "netlink", "rothman-uni", "catalyst", "summit-uni", "rho-construction", "millenium-fitness", "I.I.I.I"];
+    const servers4Port: readonly string[] = ["syscore", "alpha-ent", "global-pharm", "lexo-corp", "snap-fitness", "univ-energy", "nova-med", "unitalife", "zb-def", "aevum-police", ".", "run4theh111z"];
+    const servers5Port: readonly string[] = ["zb-institute", "galactic-cyber", "deltaone", "taiyang-digital", "aerocorp", "omnia", "icarus", "infocomm", "defcomm", "solaris", "zeus-med", "helios", "omnitek", "powerhouse-fitness", "vitalife", "titan-labs", "microdyne", "blade", "fulcrumtech"];
 
-    const serversUpTo1Port: string[] = servers0Port.concat(servers1Port);
-    const serversUpTo2Port: string[] = serversUpTo1Port.concat(servers2Port);
-    const serversUpTo3Port: string[] = serversUpTo2Port.concat(servers3Port);
-    const serversUpTo4Port: string[] = serversUpTo3Port.concat(servers4Port);
-    const serversUpTo5Port: string[] = serversUpTo4Port.concat(servers5Port);
+    const serversUpTo1Port: readonly string[] = servers0Port.concat(servers1Port);
+    const serversUpTo2Port: readonly string[] = serversUpTo1Port.concat(servers2Port);
+    const serversUpTo3Port: readonly string[] = serversUpTo2Port.concat(servers3Port);
+    const serversUpTo4Port: readonly string[] = serversUpTo3Port.concat(servers4Port);
+    const serversUpTo5Port: readonly string[] = serversUpTo4Port.concat(servers5Port);
 
-    function cancel(array: string[], script: string) {
+    function cancel(array: readonly string[], script: string) {
         var i = 0;
         while (i < array.length) {
             ns.scriptKill(script, array[i]);
