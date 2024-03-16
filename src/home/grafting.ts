@@ -4,6 +4,10 @@ export async function main(ns: any) {
     // Settings
     const focus: boolean = true; // Whether or not you want the grafting task to be focused on. This makes it go faster but prevents you from doing other things while it's working.
     const filter: string | null = "hack"; // The type of augs we specificaly want to graft. Set to null to graft everything.
+    const prioritizeNickfolas: boolean = true; // Whether you want to put down the Entropy virus first.
+
+    // Constants
+    const nickofolas: string = "nickofolas Congruity Implant";
 
     let currentCity: string = ns.getPlayer().location;
     if (currentCity !== "New Tokyo") {
@@ -23,13 +27,21 @@ export async function main(ns: any) {
         actuallyFocus = focus && focusActualNecessary;
     }
 
+    async function waitUntilNotGrafting(): Promise<void> {
+        while (ns.singularity.getCurrentWork() !== null) {
+            await ns.sleep(1000);
+        }
+    }
+
     for (let aug of graftableAugs) {
         check();
 
-        ns.grafting.graftAugmentation(aug, actuallyFocus);
-
-        while (ns.singularity.getCurrentWork() !== null) {
-            await ns.sleep(1000);
+        if (prioritizeNickfolas && !!ns.singularity.getOwnedAugmentations().includes(nickofolas)) {
+            ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
+            waitUntilNotGrafting();
+        } else {
+            ns.grafting.graftAugmentation(aug, actuallyFocus);
+            waitUntilNotGrafting();
         }
 
         check();
