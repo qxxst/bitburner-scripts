@@ -13,14 +13,18 @@ export async function main(ns: any) {
 
     let graftableAugs: string[] = ns.grafting.getGraftableAugmentations();
     let augsRemaining: number = graftableAugs.length;
+    let focusActualNecessary: boolean = !!ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
+    let actuallyFocus: boolean = focus && focusActualNecessary;
 
     function check(): void {
         graftableAugs = ns.grafting.getGraftableAugmentations();
         augsRemaining = graftableAugs.length;
+        focusActualNecessary = !!ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
+        actuallyFocus = focus && focusActualNecessary;
     }
 
     for (let aug of graftableAugs) {
-        ns.grafting.graftAugmentation(aug, focus);
+        ns.grafting.graftAugmentation(aug, actuallyFocus);
 
         while (ns.singularity.getCurrentWork() !== null) {
             await ns.sleep(1000);
