@@ -1,10 +1,10 @@
 // deploy.js by qxxst
 /** @param {NS} ns **/
 export async function main(ns: any) {
-	const host = ns.args[0];
-	const script = "scp/drain.js";
-    const home = "home";
-    const optimizedTarget = ns.args[1];
+	const host: string = ns.args[0];
+	const script: string = "scp/drain.js";
+    const home: string = "home";
+    const optimizedTarget: string = ns.args[1];
 
 	if (!ns.serverExists(host)) {
 		ns.tprint(`Server '${host}' does not exist. Aborting.`);
@@ -15,7 +15,7 @@ export async function main(ns: any) {
 		return;
 	}
 
-    const target = host
+    const target: string = host
     if (ns.fileExists("BruteSSH.exe", "home")) {
         ns.brutessh(target);
         ns.brutessh(optimizedTarget);
@@ -44,7 +44,7 @@ export async function main(ns: any) {
         await ns.singularity.installBackdoor(optimizedTarget);
     } */
 
-	let threads = Math.floor((ns.getServerMaxRam(host) - ns.getServerUsedRam(host)) / ns.getScriptRam(script));
+	let threads: number = Math.floor((ns.getServerMaxRam(host) - ns.getServerUsedRam(host)) / ns.getScriptRam(script));
     if (threads < 1) {
         threads = 1;
     }

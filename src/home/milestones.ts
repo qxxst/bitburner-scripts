@@ -2,13 +2,13 @@
 import * as util from 'lib/util';
 /** @param {NS} ns */
 export async function main(ns: any) {
-    const hackingLevel = await ns.getHackingLevel(); // The player's current hacking level.
-    const lowestCombatLevel = util.lowestCombatLevel(ns); // The player's lowest combat level.
-    const karma = ns.heart.break();
-    const money = ns.getPlayer().money;
-    const location = ns.getPlayer().location;
-    const kills = ns.getPlayer().numPeopleKilled;
-    const augs = ns.getResetInfo().ownedAugs.size;
+    const hackingLevel: number = await ns.getHackingLevel(); // The player's current hacking level.
+    const lowestCombatLevel: number = util.lowestCombatLevel(ns); // The player's lowest combat level.
+    const karma: number = ns.heart.break();
+    const money: number = ns.getPlayer().money;
+    const location: string = ns.getPlayer().location;
+    const kills: number = ns.getPlayer().numPeopleKilled;
+    const augs: number = ns.getResetInfo().ownedAugs.size;
 
     function checkFaction(faction: string) {
         if (ns.getPlayer().factions.includes(faction)) {
@@ -16,13 +16,13 @@ export async function main(ns: any) {
             return
         } else {
             // Faction requirements vary heavily. Some of these will be used and others will be left as null.
-            let combatLevelRequirement = null;
-            let hackingLevelRequirement = null;
-            let moneyRequirement = null;
-            let karmaRequirement = null;
-            let locationRequirement = null;
-            let killRequirement = null;
-            let augRequirement = null;
+            let combatLevelRequirement: number | null = null;
+            let hackingLevelRequirement: number | null = null;
+            let moneyRequirement: number | null = null;
+            let karmaRequirement: number | null = null;
+            let locationRequirement: string | null = null;
+            let killRequirement: number | null = null;
+            let augRequirement: number | null = null;
 
             // All of the criminal organizations
             if (faction == "Slum Snakes") {
@@ -138,8 +138,8 @@ export async function main(ns: any) {
 
     function checkServer(server: string, requiredPorts: number) {
         if (ns.serverExists(server)) {
-            let canHack = null;
-            let noHackReason = null;
+            let canHack: boolean | null = null;
+            let noHackReason: string | null = null;
             try {
                 if (hackingLevel >= ns.getServer(server).requiredHackingSkill) {
                     if (util.getPorts(ns) >= requiredPorts) {

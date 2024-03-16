@@ -3,8 +3,8 @@ import {sourceFileOwned, currentBitnode} from 'lib/util';
 import { Scanner } from "lib/scan";
 /** @param {NS} ns */
 export async function main(ns: any) {
-	const target = ns.args[0];
-    const factionServers = ["CSEC", "avmnite-02h", "I.I.I.I", "run4theh111z"];
+	const target: string = ns.args[0];
+    const factionServers: string[] = ["CSEC", "avmnite-02h", "I.I.I.I", "run4theh111z"];
 
     if (ns.fileExists("BruteSSH.exe", "home")) {
         ns.brutessh(target);

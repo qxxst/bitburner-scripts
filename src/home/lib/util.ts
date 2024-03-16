@@ -1,9 +1,9 @@
 // lib/util.js by qxxst
 export function lowestCombatLevel(ns: any) {
-    let str = ns.getPlayer().skills.strength;
-    let def = ns.getPlayer().skills.defense;
-    let dex = ns.getPlayer().skills.dexterity;
-    let agi = ns.getPlayer().skills.agility;
+    let str: number = ns.getPlayer().skills.strength;
+    let def: number = ns.getPlayer().skills.defense;
+    let dex: number = ns.getPlayer().skills.dexterity;
+    let agi: number = ns.getPlayer().skills.agility;
     return Math.min(str, def, dex, agi);
 }
 
@@ -16,15 +16,15 @@ export function currentBitnode(ns: any) {
 }
 
 export function grossIncomePerSecond(ns: any) {
-    let allSources = ns.getMoneySources().sinceInstall;
-    let income1 = allSources.crime + allSources.hacking + allSources.hacknet + allSources.work;
+    let allSources: {crime: number, hacking: number, hacknet: number, work: number} = ns.getMoneySources().sinceInstall;
+    let income1: number = allSources.crime + allSources.hacking + allSources.hacknet + allSources.work;
     ns.sleep(1000);
-    let income2 = allSources.crime + allSources.hacking + allSources.hacknet + allSources.work;
+    let income2: number = allSources.crime + allSources.hacking + allSources.hacknet + allSources.work;
     return income2 - income1;
 }
 
 export function getPorts(ns: any) {
-    let ports = 0;
+    let ports: number = 0;
     if (ns.fileExists("BruteSSH.exe", "home")) {
         ports = ports + 1;
     }
@@ -44,8 +44,8 @@ export function getPorts(ns: any) {
 }
 
 export function inferredDaedalusRoute(ns: any) {
-    let hackingLevel = ns.getHackingLevel();
-    let inferredRoute = null;
+    let hackingLevel: number = ns.getHackingLevel();
+    let inferredRoute: string | null = null;
     if (lowestCombatLevel(ns) > hackingLevel) {
         inferredRoute = "combat";
     } else if (hackingLevel > lowestCombatLevel(ns)) {
@@ -57,15 +57,15 @@ export function inferredDaedalusRoute(ns: any) {
 }
 
 export function nextMilestone(ns: any) {
-    let hackingLevel = ns.getHackingLevel();
-    let hackingMilestoneLevels = [ns.getServer("CSEC").requiredHackingSkill, ns.getServer("avmnite-02h").requiredHackingSkill, ns.getServer("I.I.I.I").requiredHackingSkill, ns.getServer("run4theh111z").requiredHackingSkill, 2500, ns.getServer("w0r1d_d43mon").requiredHackingSkill];
-    let combatMilestoneLevels = [30, 75, 200, 300, 850, 1200, 1500];
-    let highestMilestone;
-    let nextMilestone;
+    let hackingLevel: number = ns.getHackingLevel();
+    let hackingMilestoneLevels: number[] = [ns.getServer("CSEC").requiredHackingSkill, ns.getServer("avmnite-02h").requiredHackingSkill, ns.getServer("I.I.I.I").requiredHackingSkill, ns.getServer("run4theh111z").requiredHackingSkill, 2500, ns.getServer("w0r1d_d43mon").requiredHackingSkill];
+    let combatMilestoneLevels: number[] = [30, 75, 200, 300, 850, 1200, 1500];
+    let highestMilestone: number;
+    let nextMilestone: number;
 
     if (inferredDaedalusRoute(ns) == "hacking" || inferredDaedalusRoute(ns) == null) {
         highestMilestone = Math.max(...hackingMilestoneLevels);
-        nextMilestone = hackingMilestoneLevels.find(level => level > hackingLevel);
+        nextMilestone = hackingMilestoneLevels.find(level => level > hackingLevel) as number;
         if (hackingLevel < highestMilestone) {
             return nextMilestone;
         } else {
@@ -73,7 +73,7 @@ export function nextMilestone(ns: any) {
         }
     } else {
         highestMilestone = Math.max(...combatMilestoneLevels);
-        nextMilestone = combatMilestoneLevels.find(level => level > lowestCombatLevel(ns));
+        nextMilestone = combatMilestoneLevels.find(level => level > lowestCombatLevel(ns)) as number;
         if (lowestCombatLevel(ns) < highestMilestone) {
             return nextMilestone;
         } else {
@@ -83,7 +83,7 @@ export function nextMilestone(ns: any) {
 }
 
 export function factionAugsRemaining(ns: any, faction: string) {
-    let augsRemaining = 0;
+    let augsRemaining: number = 0;
     for (let i = 0; i < ns.singularity.getAugmentationsFromFaction(faction).length; i++) {
         if (!ns.singularity.getOwnedAugmentations().includes(ns.singularity.getAugmentationsFromFaction(faction)[i])) {
             augsRemaining = augsRemaining + 1;
@@ -93,7 +93,7 @@ export function factionAugsRemaining(ns: any, faction: string) {
 }
 
 export function donationsUnlocked(ns: any, faction: string) {
-    let favorRequirement = 150;
+    let favorRequirement: number = 150;
 
     if (currentBitnode(ns) == 3) {
         favorRequirement = 75;

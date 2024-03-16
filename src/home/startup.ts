@@ -5,28 +5,28 @@ export async function main(ns: any) {
     // SETTINGS
     // BitNodes to avoid using hacknet.js in.
     // Hacknet nodes do not work in BN 8 and have questionable returns on investment in others.
-    const hacknetNotAllowed = [3, 4, 6, 7, 8];
+    const hacknetNotAllowed: number[] = [3, 4, 6, 7, 8];
     // Whether or not the script should stay on after completing all tasks
-    const stayOn = true;
+    const stayOn: boolean = true;
     // Whether or not the sleep function should be logged
-    const logSleep = false;
+    const logSleep: boolean = false;
     // The amount of time to sleep when "actually" waiting for things to happen
-    const sleepTimeLong = 1000;
+    const sleepTimeLong: number = 1000;
     // The smaller amount of time to sleep during loops to avoid RAM issues.
     // This can be lowered if you have lots of RAM on home. On the other hand, if scripts are not being deployed properly, try raising it.
-    const sleepTimeShort = 100;
+    const sleepTimeShort: number = 100;
     // Set this to true to avoid creating a gang. Useful for BN2's challenge.
-    const noGang = false;
+    const noGang: boolean = false;
 
     // CONSTANTS - DO NOT CHANGE
-    const home = "home";
-    const script = "deploy.js";
-    const deployScript = "scp/drain.js";
-    const defaultThreads = 1;
+    const home: string = "home";
+    const script: string = "deploy.js";
+    const deployScript: string = "scp/drain.js";
+    const defaultThreads: number = 1;
 
     // Declare variables
-    var optimizedTarget = "foodnstuff";
-    var targetThreshold = ns.getServerMaxMoney(optimizedTarget);
+    var optimizedTarget: string = "foodnstuff";
+    var targetThreshold: number = ns.getServerMaxMoney(optimizedTarget);
 
     if (logSleep == false) {
         ns.disableLog("sleep");
@@ -60,7 +60,7 @@ export async function main(ns: any) {
     }
 
     // If the current BitNode is 8, or SourceFile 8 is owned, run tix.js immediately.
-    let execTixLater = true;
+    let execTixLater: boolean = true;
     if (currentBitnode(ns) == 8 || sourceFileOwned(ns, 8, 1)) {
         ns.exec("tix.js", home);
         // Remind the script to not run tix.js again later
@@ -69,18 +69,18 @@ export async function main(ns: any) {
 
     // GENERAL STARTUP TASKS
     // Declare lists of servers sorted by how many ports are required to access them
-    const servers0Port = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi"];
-    const servers1Port = ["neo-net", "zer0", "max-hardware", "iron-gym", "CSEC"];
-    const servers2Port = ["phantasy", "omega-net", "silver-helix", "the-hub", "crush-fitness", "avmnite-02h"];
-    const servers3Port = ["computek", "netlink", "rothman-uni", "catalyst", "summit-uni", "rho-construction", "millenium-fitness", "I.I.I.I"];
-    const servers4Port = ["syscore", "alpha-ent", "global-pharm", "lexo-corp", "snap-fitness", "univ-energy", "nova-med", "unitalife", "zb-def", "aevum-police", ".", "run4theh111z"];
-    const servers5Port = ["zb-institute", "galactic-cyber", "deltaone", "taiyang-digital", "aerocorp", "omnia", "icarus", "infocomm", "defcomm", "solaris", "zeus-med", "helios", "omnitek", "powerhouse-fitness", "vitalife", "titan-labs", "microdyne", "blade", "fulcrumtech"];
+    const servers0Port: string[] = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi"];
+    const servers1Port: string[] = ["neo-net", "zer0", "max-hardware", "iron-gym", "CSEC"];
+    const servers2Port: string[] = ["phantasy", "omega-net", "silver-helix", "the-hub", "crush-fitness", "avmnite-02h"];
+    const servers3Port: string[] = ["computek", "netlink", "rothman-uni", "catalyst", "summit-uni", "rho-construction", "millenium-fitness", "I.I.I.I"];
+    const servers4Port: string[] = ["syscore", "alpha-ent", "global-pharm", "lexo-corp", "snap-fitness", "univ-energy", "nova-med", "unitalife", "zb-def", "aevum-police", ".", "run4theh111z"];
+    const servers5Port: string[] = ["zb-institute", "galactic-cyber", "deltaone", "taiyang-digital", "aerocorp", "omnia", "icarus", "infocomm", "defcomm", "solaris", "zeus-med", "helios", "omnitek", "powerhouse-fitness", "vitalife", "titan-labs", "microdyne", "blade", "fulcrumtech"];
 
-    const serversUpTo1Port = servers0Port.concat(servers1Port);
-    const serversUpTo2Port = serversUpTo1Port.concat(servers2Port);
-    const serversUpTo3Port = serversUpTo2Port.concat(servers3Port);
-    const serversUpTo4Port = serversUpTo3Port.concat(servers4Port);
-    const serversUpTo5Port = serversUpTo4Port.concat(servers5Port);
+    const serversUpTo1Port: string[] = servers0Port.concat(servers1Port);
+    const serversUpTo2Port: string[] = serversUpTo1Port.concat(servers2Port);
+    const serversUpTo3Port: string[] = serversUpTo2Port.concat(servers3Port);
+    const serversUpTo4Port: string[] = serversUpTo3Port.concat(servers4Port);
+    const serversUpTo5Port: string[] = serversUpTo4Port.concat(servers5Port);
 
     function cancel(array: string[], script: string) {
         var i = 0;
@@ -109,7 +109,7 @@ export async function main(ns: any) {
         resetTarget();
         var i = 0;
         while (i < servers0Port.length) {
-            let target = servers0Port[i];
+            let target: string = servers0Port[i];
             if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
                 if (targetThreshold < ns.getServerMaxMoney(target)) {
                     optimizedTarget = target;
@@ -130,7 +130,7 @@ export async function main(ns: any) {
 
         var i = 0;
         while (i < servers1Port.length) {
-            let target = servers1Port[i];
+            let target: string = servers1Port[i];
             if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel() && ns.fileExists("BruteSSH.exe", "home")) {
                 if (targetThreshold < ns.getServerMaxMoney(target)) {
                     optimizedTarget = target;
@@ -151,7 +151,7 @@ export async function main(ns: any) {
 
         var i = 0;
         while (i < servers2Port.length) {
-            let target = servers2Port[i];
+            let target: string = servers2Port[i];
             if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel() && ns.fileExists("FTPCrack.exe", "home")) {
                 if (targetThreshold < ns.getServerMaxMoney(target)) {
                     optimizedTarget = target;
@@ -172,7 +172,7 @@ export async function main(ns: any) {
 
         var i = 0;
         while (i < servers3Port.length) {
-            let target = servers3Port[i];
+            let target: string = servers3Port[i];
             if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel() && ns.fileExists("relaySMTP.exe", "home")) {
                 if (targetThreshold < ns.getServerMaxMoney(target)) {
                     optimizedTarget = target;
@@ -193,7 +193,7 @@ export async function main(ns: any) {
 
         var i = 0;
         while (i < servers4Port.length) {
-            let target = servers4Port[i];
+            let target: string = servers4Port[i];
             if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel() && ns.fileExists("HTTPWorm.exe", "home")) {
                 if (targetThreshold < ns.getServerMaxMoney(target)) {
                     optimizedTarget = target;
@@ -214,7 +214,7 @@ export async function main(ns: any) {
 
         var i = 0;
         while (i < servers5Port.length) {
-            let target = servers5Port[i];
+            let target: string = servers5Port[i];
             if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel() && ns.fileExists("SQLInject.exe", "home")) {
                 if (targetThreshold < ns.getServerMaxMoney(target)) {
                     optimizedTarget = target;
@@ -239,7 +239,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers0Port.length) {
-        let target = servers0Port[i];
+        let target: string = servers0Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -264,7 +264,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers0Port.length) {
-        let target = servers0Port[i];
+        let target: string = servers0Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -279,7 +279,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers1Port.length) {
-        let target = servers1Port[i];
+        let target: string = servers1Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -304,7 +304,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers0Port.length) {
-        let target = servers0Port[i];
+        let target: string = servers0Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -319,7 +319,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers1Port.length) {
-        let target = servers1Port[i];
+        let target: string = servers1Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -334,7 +334,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers2Port.length) {
-        let target = servers2Port[i];
+        let target: string = servers2Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -359,7 +359,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers0Port.length) {
-        let target = servers0Port[i];
+        let target: string = servers0Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -374,7 +374,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers1Port.length) {
-        let target = servers1Port[i];
+        let target: string = servers1Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -389,7 +389,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers2Port.length) {
-        let target = servers2Port[i];
+        let target: string = servers2Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -404,7 +404,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers3Port.length) {
-        let target = servers3Port[i];
+        let target: string = servers3Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -434,7 +434,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers0Port.length) {
-        let target = servers0Port[i];
+        let target: string = servers0Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -449,7 +449,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers1Port.length) {
-        let target = servers1Port[i];
+        let target: string = servers1Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -464,7 +464,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers2Port.length) {
-        let target = servers2Port[i];
+        let target: string = servers2Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -479,7 +479,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers3Port.length) {
-        let target = servers3Port[i];
+        let target: string = servers3Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -494,7 +494,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers4Port.length) {
-        let target = servers4Port[i];
+        let target: string = servers4Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -519,7 +519,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers0Port.length) {
-        let target = servers0Port[i];
+        let target: string = servers0Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -534,7 +534,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers1Port.length) {
-        let target = servers1Port[i];
+        let target: string = servers1Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -549,7 +549,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers2Port.length) {
-        let target = servers2Port[i];
+        let target: string = servers2Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -564,7 +564,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers3Port.length) {
-        let target = servers3Port[i];
+        let target: string = servers3Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -579,7 +579,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers4Port.length) {
-        let target = servers4Port[i];
+        let target: string = servers4Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }
@@ -594,7 +594,7 @@ export async function main(ns: any) {
 
     var i = 0;
     while (i < servers5Port.length) {
-        let target = servers5Port[i];
+        let target: string = servers5Port[i];
         if (ns.getServerMaxRam(target) > 0 && ns.getServerRequiredHackingLevel(target) <= ns.getHackingLevel()) {
             ns.exec(script, home, defaultThreads, target, optimizedTarget);
         }

@@ -35,7 +35,7 @@ export async function main(ns: any) {
         }
     }
 
-    let companyFactions = ["ECorp", "MegaCorp", "KuaiGong International", "Four Sigma", "NWO", "Blade Industries", "OmniTek Incorporated", "Bachman & Associates", "Clarke Incorporated", "Fulcrum Secret Technologies"];
+    let companyFactions: string[] = ["ECorp", "MegaCorp", "KuaiGong International", "Four Sigma", "NWO", "Blade Industries", "OmniTek Incorporated", "Bachman & Associates", "Clarke Incorporated", "Fulcrum Secret Technologies"];
     for (let faction of companyFactions) {
         checkCompanyFaction(faction);
     }
