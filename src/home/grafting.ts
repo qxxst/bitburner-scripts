@@ -17,14 +17,16 @@ export async function main(ns: any) {
 
     let graftableAugs: string[] = ns.grafting.getGraftableAugmentations();
     let augsRemaining: number = graftableAugs.length;
-    let focusActualNecessary: boolean = !!ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
+    let focusActualNecessary: boolean = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
     let actuallyFocus: boolean = focus && focusActualNecessary;
+    let ownedAugmentations: string[] = await ns.singularity.getOwnedAugmentations();
 
-    function check(): void {
+    async function check(): Promise<void> {
         graftableAugs = ns.grafting.getGraftableAugmentations();
         augsRemaining = graftableAugs.length;
-        focusActualNecessary = !!ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
+        focusActualNecessary = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
         actuallyFocus = focus && focusActualNecessary;
+        ownedAugmentations = await ns.singularity.getOwnedAugmentations();
     }
 
     async function waitUntilNotGrafting(): Promise<void> {
@@ -34,16 +36,16 @@ export async function main(ns: any) {
     }
 
     for (let aug of graftableAugs) {
-        check();
+        await check();
+        await waitUntilNotGrafting();
 
-        if (prioritizeNickfolas && !!ns.singularity.getOwnedAugmentations().includes(nickofolas)) {
-            ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
-            waitUntilNotGrafting();
+        if (prioritizeNickfolas && !!ownedAugmentations.includes(nickofolas)) {
+            await ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
         } else {
-            ns.grafting.graftAugmentation(aug, actuallyFocus);
-            waitUntilNotGrafting();
+            await ns.grafting.graftAugmentation(aug, actuallyFocus);
         }
+        await waitUntilNotGrafting();
 
-        check();
+        await check();
     }
 }
