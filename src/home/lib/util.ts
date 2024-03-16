@@ -99,5 +99,5 @@ export function donationsUnlocked(ns: any, faction: string): boolean {
         favorRequirement = 75;
     }
 
-    return ns.singularity.getFactionFavor(faction) >= favorRequirement
+    return ns.singularity.getFactionFavor(faction) >= favorRequirement;
 }
