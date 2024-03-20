@@ -49,6 +49,15 @@ export async function main(ns: any) {
         }
     }
 
+    if (!ownedAugmentations.includes(nickofolas)) {
+        const query: string = "You do not currently have the " + nickofolas + " installed. It is recommended to graft that first. (The script will do that for you if you have enough money.) Would you like to proceed without it?";
+        const result: boolean = await ns.prompt(query);
+        const thisScript: string = "grafting.js";
+        if (!result) {
+            ns.kill(thisScript);
+        }
+    }
+
     for (let aug of graftableAugs) {
         await check();
         await waitUntilNotGrafting();
