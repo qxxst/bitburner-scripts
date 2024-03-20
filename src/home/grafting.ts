@@ -16,11 +16,6 @@ export async function main(ns: any) {
     }
 
     let currentCity: string = ns.getPlayer().location;
-    if (currentCity !== "New Tokyo") {
-        ns.singularity.travelToCity("New Tokyo");
-        currentCity = "New Tokyo";
-    }
-
     let graftableAugs: string[] = ns.grafting.getGraftableAugmentations();
     let augsRemaining: number = graftableAugs.length;
     let focusActualNecessary: boolean = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
@@ -28,6 +23,12 @@ export async function main(ns: any) {
     let ownedAugmentations: string[] = await ns.singularity.getOwnedAugmentations();
 
     async function check(): Promise<void> {
+        currentCity = ns.getPlayer().location;
+        if (currentCity !== "New Tokyo") {
+            ns.singularity.travelToCity("New Tokyo");
+            currentCity = "New Tokyo";
+        }
+
         graftableAugs = ns.grafting.getGraftableAugmentations();
         augsRemaining = graftableAugs.length;
         focusActualNecessary = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
