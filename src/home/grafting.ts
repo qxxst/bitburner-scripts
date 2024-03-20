@@ -21,6 +21,7 @@ export async function main(ns: any) {
     let focusActualNecessary: boolean = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
     let actuallyFocus: boolean = focus && focusActualNecessary;
     let ownedAugmentations: string[] = await ns.singularity.getOwnedAugmentations();
+    let money: number = ns.getPlayer().money;
 
     async function check(): Promise<void> {
         currentCity = ns.getPlayer().location;
@@ -34,6 +35,12 @@ export async function main(ns: any) {
         focusActualNecessary = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
         actuallyFocus = focus && focusActualNecessary;
         ownedAugmentations = await ns.singularity.getOwnedAugmentations();
+        money = ns.getPlayer().money;
+    }
+
+    function canAfford(aug: string): boolean {
+        money = ns.getPlayer().money;
+        return money >= ns.grafting.getAugmentationGraftPrice(aug);
     }
 
     async function waitUntilNotGrafting(): Promise<void> {
@@ -47,9 +54,13 @@ export async function main(ns: any) {
         await waitUntilNotGrafting();
 
         if (prioritizeNickfolas && !ownedAugmentations.includes(nickofolas)) {
-            await ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
+            if (canAfford(nickofolas)) {
+                await ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
+            }
         } else {
-            await ns.grafting.graftAugmentation(aug, actuallyFocus);
+            if (canAfford(aug)) {
+                await ns.grafting.graftAugmentation(aug, actuallyFocus);
+            }
         }
 
         await waitUntilNotGrafting();
