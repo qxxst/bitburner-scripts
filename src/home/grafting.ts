@@ -8,8 +8,53 @@ export async function main(ns: any) {
 
     // Constants
     const nickofolas: string = "nickofolas Congruity Implant";
-    const hackingRelatedMultipliers: string[] = ["hacking_chance", "hacking_exp", "hacking_grow", "hacking_money", "hacking_speed", "hacking"];
-    const combatRelatedMultipliers: string[] = ["agility_exp", "agility", "defense_exp", "defense", "dexterity_exp", "dexterity", "strength_exp", "strength"];
+
+    const hackingAugs: string[] = [
+        "BitWire",
+        "Artificial Bio-neural Network Implant",
+        "Artificial Synaptic Potentiation",
+        "Enhanced Mylen Sheathing",
+        "Synaptic Enhancement Implant",
+        "Neural-Retention Enhancement",
+        "DataJack",
+        "Embedded Netburner Module",
+        "Embedded Netburner Module Core Implant",
+        "Embedded Netburner Module Core V2 Upgrade",
+        "Embedded Netburner Module Core V3 Upgrade",
+        "Embedded Netburner Module Analyze Engine",
+        "Embedded Netburner Module Direct Memory Access Upgrade",
+        "Neuralstimulator",
+        "Neural Accelerator",
+        "Cranial Signal Processors - Gen I",
+        "Cranial Signal Processors - Gen II",
+        "Cranial Signal Processors - Gen III",
+        "Cranial Signal Processors - Gen IV",
+        "Cranial Signal Processors - Gen V",
+        "Neuronal Densification",
+        "FocusWire",
+        "PC Direct-Neural Interface",
+        "PC Direct-Neural Interface Optimization Submodule",
+        "PC Direct-Neural Interface NeuroNet Injector",
+        "PCMatrix",
+        "Neurotrainer I",
+        "Neurotrainer II",
+        "Neurotrainer III",
+        "HyperSight Corneal Implant",
+        "Power Recirculation Core",
+        "QLink",
+        "SPTN-97 Gene Modification",
+        "ECorp HVMind Implant", // Honestly forgot what this does but I'm pretty sure it goes in here
+        "Xanipher",
+        "nextSENS Gene Modification",
+        "OmniTek InfoLoad",
+        "BitRunners Neurolink",
+        "The Black Hand",
+        "CRTX42-AA Gene Modification",
+        "Neuregen Gene Modification",
+        "nickofolas Congruity Implant", // Throw it in here a second time just to be safe
+    ];
+
+    const combatAugs: string[] = [];
 
     if (logSleep == false) {
         ns.disableLog("sleep");
