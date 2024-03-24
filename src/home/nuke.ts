@@ -1,6 +1,14 @@
 // nuke.js by qxxst
 import {sourceFileOwned, currentBitnode} from 'lib/util';
-import { Scanner } from "lib/scan";
+import {getEnv} from 'env';
+
+let Scanner: any;
+if (getEnv().imQxxst) {
+    import("lib/scan").then((module) => {
+        Scanner = module.Scanner;
+    })
+}
+
 /** @param {NS} ns */
 export async function main(ns: any) {
 	const target: string = ns.args[0];
@@ -24,23 +32,25 @@ export async function main(ns: any) {
     
     ns.nuke(target);
     if (sourceFileOwned(ns, 4, 1) || currentBitnode(ns) == 4) {
-        let route_list: any = Scanner.route(ns, target, true);
-        try {
-            if (route_list) {
-                let first_stop: any = route_list.shift(); // pop home off
-                if (first_stop && first_stop != "home") {
-                    route_list.unshift(first_stop);
+        if (getEnv().imQxxst) {
+            let route_list: any = Scanner.route(ns, target, true);
+            try {
+                if (route_list) {
+                    let first_stop: any = route_list.shift(); // pop home off
+                    if (first_stop && first_stop != "home") {
+                        route_list.unshift(first_stop);
+                    }
+                    for (let link of route_list) {
+                        ns.singularity.connect(link);
+                    }
+                    await ns.singularity.installBackdoor();
+                    await ns.sleep(1000);
+                    ns.singularity.connect("home");
                 }
-                for (let link of route_list) {
-                    ns.singularity.connect(link);
-                }
-                await ns.singularity.installBackdoor();
-                await ns.sleep(1000);
-                ns.singularity.connect("home");
             }
-        }
-        catch {
-            await ns.sleep(1000);
+            catch {
+                await ns.sleep(1000);
+            }
         }
         
         if (factionServers.includes(target)) {

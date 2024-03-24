@@ -1,7 +1,11 @@
 interface env {
-    ImQxxst: boolean;
+    imQxxst: boolean;
 }
 
-export const env: env = {
-    ImQxxst: false
+const env: env = {
+    imQxxst: false
+}
+
+export function getEnv(): env {
+    return env;
 }
