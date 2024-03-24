@@ -2,9 +2,13 @@
 /** @param {NS} ns */
 export async function main(ns: any) {
     // Settings
+    const filter: filter = "hack"; // Pick what you need to graft. "hack" for hacking augs, "combat" for combat augs, or "all" for everything.
     const focus: boolean = true; // Whether or not you want the grafting task to be focused on. This makes it go faster but prevents you from doing other things while it's working.
     const prioritizeNickfolas: boolean = true; // Whether you want to put down the Entropy virus first.
     const logSleep: boolean = false; // Whether or not the sleep function should be logged.
+
+    // Types
+    type filter = "hack" | "combat" | "all";
 
     // Constants
     const nickofolas: string = "nickofolas Congruity Implant";
