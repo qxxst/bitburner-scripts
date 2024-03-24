@@ -5,7 +5,7 @@ export async function main(ns: any) {
     // SETTINGS
     // BitNodes to avoid using hacknet.js in.
     // Hacknet nodes do not work in BN 8 and have questionable returns on investment in others.
-    const hacknetNotAllowed: number[] = [3, 4, 6, 7, 8];
+    const hacknetNotAllowed: number[] = [3, 4, 5, 6, 7, 8];
     // Whether or not the script should stay on after completing all tasks
     const stayOn: boolean = true;
     // Whether or not the sleep function should be logged
