@@ -8,51 +8,54 @@ export async function main(ns) {
     const logSleep = false; // Whether or not the sleep function should be logged.
     // Constants
     const nickofolas = "nickofolas Congruity Implant";
-    const hackingAugs = [
-        "BitWire",
-        "Artificial Bio-neural Network Implant",
-        "Artificial Synaptic Potentiation",
-        "Enhanced Mylen Sheathing",
-        "Synaptic Enhancement Implant",
-        "Neural-Retention Enhancement",
-        "DataJack",
-        "Embedded Netburner Module",
-        "Embedded Netburner Module Core Implant",
-        "Embedded Netburner Module Core V2 Upgrade",
-        "Embedded Netburner Module Core V3 Upgrade",
-        "Embedded Netburner Module Analyze Engine",
-        "Embedded Netburner Module Direct Memory Access Upgrade",
-        "Neuralstimulator",
-        "Neural Accelerator",
-        "Cranial Signal Processors - Gen I",
-        "Cranial Signal Processors - Gen II",
-        "Cranial Signal Processors - Gen III",
-        "Cranial Signal Processors - Gen IV",
-        "Cranial Signal Processors - Gen V",
-        "Neuronal Densification",
-        "FocusWire",
-        "PC Direct-Neural Interface",
-        "PC Direct-Neural Interface Optimization Submodule",
-        "PC Direct-Neural Interface NeuroNet Injector",
-        "PCMatrix",
-        "Neurotrainer I",
-        "Neurotrainer II",
-        "Neurotrainer III",
-        "HyperSight Corneal Implant",
-        "Power Recirculation Core",
-        "QLink",
-        "SPTN-97 Gene Modification",
-        "ECorp HVMind Implant", // Honestly forgot what this does but I'm pretty sure it goes in here
-        "Xanipher",
-        "nextSENS Gene Modification",
-        "OmniTek InfoLoad",
-        "BitRunners Neurolink",
-        "The Black Hand",
-        "CRTX42-AA Gene Modification",
-        "Neuregen Gene Modification",
-        "nickofolas Congruity Implant", // Throw it in here a second time just to be safe
-    ];
-    const combatAugs = [];
+    const filterAugs = {
+        hack: [
+            "BitWire",
+            "Artificial Bio-neural Network Implant",
+            "Artificial Synaptic Potentiation",
+            "Enhanced Mylen Sheathing",
+            "Synaptic Enhancement Implant",
+            "Neural-Retention Enhancement",
+            "DataJack",
+            "Embedded Netburner Module",
+            "Embedded Netburner Module Core Implant",
+            "Embedded Netburner Module Core V2 Upgrade",
+            "Embedded Netburner Module Core V3 Upgrade",
+            "Embedded Netburner Module Analyze Engine",
+            "Embedded Netburner Module Direct Memory Access Upgrade",
+            "Neuralstimulator",
+            "Neural Accelerator",
+            "Cranial Signal Processors - Gen I",
+            "Cranial Signal Processors - Gen II",
+            "Cranial Signal Processors - Gen III",
+            "Cranial Signal Processors - Gen IV",
+            "Cranial Signal Processors - Gen V",
+            "Neuronal Densification",
+            "FocusWire",
+            "PC Direct-Neural Interface",
+            "PC Direct-Neural Interface Optimization Submodule",
+            "PC Direct-Neural Interface NeuroNet Injector",
+            "PCMatrix",
+            "Neurotrainer I",
+            "Neurotrainer II",
+            "Neurotrainer III",
+            "HyperSight Corneal Implant",
+            "Power Recirculation Core",
+            "QLink",
+            "SPTN-97 Gene Modification",
+            "ECorp HVMind Implant", // Honestly forgot what this does but I'm pretty sure it goes in here
+            "Xanipher",
+            "nextSENS Gene Modification",
+            "OmniTek InfoLoad",
+            "BitRunners Neurolink",
+            "The Black Hand",
+            "CRTX42-AA Gene Modification",
+            "Neuregen Gene Modification",
+            nickofolas // Throw it in here a second time just to be safe
+        ],
+        combat: []
+    };
+    const filteredAugs = filterAugs[filter];
     if (logSleep == false) {
         ns.disableLog("sleep");
     }
@@ -104,6 +107,9 @@ export async function main(ns) {
         else {
             if (canAfford(aug)) {
                 if (filter !== "all") {
+                    if (filteredAugs.includes(aug)) {
+                        await ns.grafting.graftAugmentation(aug, actuallyFocus);
+                    }
                 }
                 else {
                     await ns.grafting.graftAugmentation(aug, actuallyFocus);
