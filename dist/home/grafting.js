@@ -103,7 +103,11 @@ export async function main(ns) {
         }
         else {
             if (canAfford(aug)) {
-                await ns.grafting.graftAugmentation(aug, actuallyFocus);
+                if (filter !== "all") {
+                }
+                else {
+                    await ns.grafting.graftAugmentation(aug, actuallyFocus);
+                }
             }
         }
         await waitUntilNotGrafting();
