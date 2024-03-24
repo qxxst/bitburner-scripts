@@ -3,9 +3,6 @@ import {sourceFileOwned, currentBitnode, getPorts} from 'lib/util.js';
 /** @param {NS} ns */
 export async function main(ns: any) {
     // SETTINGS
-    // BitNodes to avoid using hacknet.js in.
-    // Hacknet nodes do not work in BN 8 and have questionable returns on investment in others.
-    const hacknetNotAllowed: number[] = [3, 4, 5, 6, 7, 8];
     // Whether or not the script should stay on after completing all tasks
     const stayOn: boolean = true;
     // Whether or not the sleep function should be logged
@@ -40,8 +37,7 @@ export async function main(ns: any) {
     resetTarget();
     ns.print("Starting target threshold is " + targetThreshold + ".");
 
-    // Kills any previously running instances of hacknet.js, tix.js, and combatgang.js
-    ns.scriptKill("hacknet.js", home);
+    // Kills any previously running instances of tix.js and combatgang.js
     ns.scriptKill("tix.js", home);
     ns.scriptKill("combatgang.js", home);
 
@@ -52,11 +48,6 @@ export async function main(ns: any) {
         if (ns.gang.inGang() == true && noGang == false) {
             ns.exec("combatgang.js", home);
         }
-    }
-
-    // Run hacknet.js if the current BitNode isn't one that it shouldn't be used in.
-    if (!hacknetNotAllowed.includes(currentBitnode(ns))) {
-        ns.exec("hacknet.js", home);
     }
 
     // If the current BitNode is 8, or SourceFile 8 is owned, run tix.js immediately.
