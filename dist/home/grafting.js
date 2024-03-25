@@ -3,7 +3,7 @@
 export async function main(ns) {
     // Settings
     const filter = "hack"; // Pick what you need to graft. "hack" for hacking augs, "combat" for combat augs, or "all" for everything.
-    const focus = true; // Whether or not you want the grafting task to be focused on. This makes it go faster but prevents you from doing other things while it's working.
+    let focus = true; // Whether or not you want the grafting task to be focused on. This makes it go faster but prevents you from doing other things while it's working.
     const prioritizeNickfolas = true; // Whether you want to put down the Entropy virus first.
     const logSleep = false; // Whether or not the sleep function should be logged.
     // Constants
@@ -63,7 +63,7 @@ export async function main(ns) {
     let graftableAugs = ns.grafting.getGraftableAugmentations();
     let augsRemaining = graftableAugs.length;
     let focusActualNecessary = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
-    let actuallyFocus = focus && focusActualNecessary;
+    focus = focus && focusActualNecessary;
     let ownedAugmentations = await ns.singularity.getOwnedAugmentations();
     let money = ns.getPlayer().money;
     async function check() {
@@ -75,7 +75,7 @@ export async function main(ns) {
         graftableAugs = ns.grafting.getGraftableAugmentations();
         augsRemaining = graftableAugs.length;
         focusActualNecessary = !!await ns.singularity.getOwnedAugmentations().includes("Neural-Retention Enhancement");
-        actuallyFocus = focus && focusActualNecessary;
+        focus = focus && focusActualNecessary;
         ownedAugmentations = await ns.singularity.getOwnedAugmentations();
         money = ns.getPlayer().money;
     }
@@ -101,18 +101,18 @@ export async function main(ns) {
         await waitUntilNotGrafting();
         if (prioritizeNickfolas && !ownedAugmentations.includes(nickofolas)) {
             if (canAfford(nickofolas)) {
-                await ns.grafting.graftAugmentation(nickofolas, actuallyFocus);
+                await ns.grafting.graftAugmentation(nickofolas, focus);
             }
         }
         else {
             if (canAfford(aug)) {
                 if (filter !== "all") {
                     if (filteredAugs.includes(aug)) {
-                        await ns.grafting.graftAugmentation(aug, actuallyFocus);
+                        await ns.grafting.graftAugmentation(aug, focus);
                     }
                 }
                 else {
-                    await ns.grafting.graftAugmentation(aug, actuallyFocus);
+                    await ns.grafting.graftAugmentation(aug, focus);
                 }
             }
         }
