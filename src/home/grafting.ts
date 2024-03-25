@@ -10,13 +10,7 @@ export async function main(ns: any) {
     // Constants
     const nickofolas: string = "nickofolas Congruity Implant";
 
-    interface augsList {
-        hack: readonly string[];
-        combat: readonly string[];
-        [key: string]: readonly string[];
-    }
-
-    const filterAugs: augsList = {
+    const filterAugs: { [key: string]: string[] } = {
         hack: [
             nickofolas, // Throw it in here a second time just to be safe
             "BitWire",

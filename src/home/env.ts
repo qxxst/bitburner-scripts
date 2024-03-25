@@ -1,13 +1,9 @@
 // env.js by qxxst
 
-interface env {
-    imQxxst: boolean;
-}
-
-const env: env = {
+const env: { imQxxst: boolean } = {
     imQxxst: false
 }
 
-export function getEnv(): env {
+export function getEnv() {
     return env;
 }
