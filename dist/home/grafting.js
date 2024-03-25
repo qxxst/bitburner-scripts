@@ -3,7 +3,7 @@
 export async function main(ns) {
     // Settings
     const filter = "hack"; // Pick what you need to graft. "hack" for hacking augs, "combat" for combat augs, or "all" for everything.
-    let focus = true; // Whether or not you want the grafting task to be focused on. This makes it go faster but prevents you from doing other things while it's working.
+    let focus = true; // Whether or not you want the grafting task to be focused on. Redundant and automatically disabled if you have the Neural-Retention Enhancement.
     const prioritizeNickfolas = true; // Whether you want to put down the Entropy virus first.
     const logSleep = false; // Whether or not the sleep function should be logged.
     // Constants
