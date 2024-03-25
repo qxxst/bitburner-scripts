@@ -1,3 +1,5 @@
+// env.js by qxxst
+
 interface env {
     imQxxst: boolean;
 }

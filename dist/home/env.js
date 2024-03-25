@@ -1,3 +1,4 @@
+// env.js by qxxst
 const env = {
     imQxxst: false
 };
