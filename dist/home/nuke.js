@@ -1,10 +1,7 @@
 // nuke.js by qxxst
-import { sourceFileOwned, currentBitnode } from 'lib/util';
-import { Scanner } from "lib/scan";
 /** @param {NS} ns */
 export async function main(ns) {
     const target = ns.args[0];
-    const factionServers = ["CSEC", "avmnite-02h", "I.I.I.I", "run4theh111z"];
     if (ns.fileExists("BruteSSH.exe", "home")) {
         ns.brutessh(target);
     }
@@ -21,31 +18,4 @@ export async function main(ns) {
         ns.sqlinject(target);
     }
     ns.nuke(target);
-    if (sourceFileOwned(ns, 4, 1) || currentBitnode(ns) == 4) {
-        let route_list = Scanner.route(ns, target, true);
-        try {
-            if (route_list) {
-                let first_stop = route_list.shift(); // pop home off
-                if (first_stop && first_stop != "home") {
-                    route_list.unshift(first_stop);
-                }
-                for (let link of route_list) {
-                    ns.singularity.connect(link);
-                }
-                await ns.singularity.installBackdoor();
-                await ns.sleep(1000);
-                ns.singularity.connect("home");
-            }
-        }
-        catch {
-            await ns.sleep(1000);
-        }
-        if (factionServers.includes(target)) {
-            await ns.sleep(1000);
-            await ns.singularity.joinFaction("CyberSec");
-            await ns.singularity.joinFaction("NiteSec");
-            await ns.singularity.joinFaction("The Black Hand");
-            await ns.singularity.joinFaction("BitRunners");
-        }
-    }
 }

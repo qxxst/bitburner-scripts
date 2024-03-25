@@ -1,11 +1,9 @@
 // startup.js by qxxst
 import { sourceFileOwned, currentBitnode, getPorts } from 'lib/util.js';
+import { getEnv } from 'env';
 /** @param {NS} ns */
 export async function main(ns) {
     // SETTINGS
-    // BitNodes to avoid using hacknet.js in.
-    // Hacknet nodes do not work in BN 8 and have questionable returns on investment in others.
-    const hacknetNotAllowed = [3, 4, 5, 6, 7, 8];
     // Whether or not the script should stay on after completing all tasks
     const stayOn = true;
     // Whether or not the sleep function should be logged
@@ -34,8 +32,7 @@ export async function main(ns) {
     }
     resetTarget();
     ns.print("Starting target threshold is " + targetThreshold + ".");
-    // Kills any previously running instances of hacknet.js, tix.js, and combatgang.js
-    ns.scriptKill("hacknet.js", home);
+    // Kills any previously running instances of tix.js and combatgang.js
     ns.scriptKill("tix.js", home);
     ns.scriptKill("combatgang.js", home);
     // BITNODE-SPECIFIC TASKS
@@ -43,17 +40,17 @@ export async function main(ns) {
     if (currentBitnode(ns) == 2 || sourceFileOwned(ns, 2, 1)) {
         // But only if we actually have a gang to run, and noGangs isn't enabled.
         if (ns.gang.inGang() == true && noGang == false) {
-            ns.exec("combatgang.js", home);
+            if (getEnv().imQxxst) {
+                ns.exec("combatgang.js", home);
+            }
         }
-    }
-    // Run hacknet.js if the current BitNode isn't one that it shouldn't be used in.
-    if (!hacknetNotAllowed.includes(currentBitnode(ns))) {
-        ns.exec("hacknet.js", home);
     }
     // If the current BitNode is 8, or SourceFile 8 is owned, run tix.js immediately.
     let execTixLater = true;
     if (currentBitnode(ns) == 8 || sourceFileOwned(ns, 8, 1)) {
-        ns.exec("tix.js", home);
+        if (getEnv().imQxxst) {
+            ns.exec("tix.js", home);
+        }
         // Remind the script to not run tix.js again later
         execTixLater = false;
     }
@@ -378,7 +375,7 @@ export async function main(ns) {
         await ns.sleep(sleepTimeShort);
     }
     await ns.sleep(sleepTimeLong);
-    if (execTixLater == true) {
+    if (execTixLater == true && getEnv().imQxxst) {
         ns.exec("tix.js", home);
     }
     while (getPorts(ns) < 4) {

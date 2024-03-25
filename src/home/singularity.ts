@@ -40,7 +40,6 @@ export async function main(ns: any) {
 
     // Kill any running instances of startup.js and its friends
     ns.scriptKill("startup.js", home);
-    ns.scriptKill("hacknet.js", home);
     ns.scriptKill("tix.js", home);
     ns.scriptKill("combatgang.js", home);
 
