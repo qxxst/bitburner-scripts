@@ -10,6 +10,7 @@ export async function main(ns) {
     const nickofolas = "nickofolas Congruity Implant";
     const filterAugs = {
         hack: [
+            nickofolas, // Throw it in here a second time just to be safe
             "BitWire",
             "Artificial Bio-neural Network Implant",
             "Artificial Synaptic Potentiation",
@@ -51,9 +52,10 @@ export async function main(ns) {
             "The Black Hand",
             "CRTX42-AA Gene Modification",
             "Neuregen Gene Modification",
-            nickofolas // Throw it in here a second time just to be safe
         ],
-        combat: []
+        combat: [
+            nickofolas, // Throw it in here a second time just to be safe
+        ]
     };
     const filteredAugs = filterAugs[filter];
     if (logSleep == false) {

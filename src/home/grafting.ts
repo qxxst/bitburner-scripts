@@ -18,6 +18,7 @@ export async function main(ns: any) {
 
     const filterAugs: augsList = {
         hack: [
+            nickofolas, // Throw it in here a second time just to be safe
             "BitWire",
             "Artificial Bio-neural Network Implant",
             "Artificial Synaptic Potentiation",
@@ -59,10 +60,9 @@ export async function main(ns: any) {
             "The Black Hand",
             "CRTX42-AA Gene Modification",
             "Neuregen Gene Modification",
-            nickofolas // Throw it in here a second time just to be safe
         ],
         combat: [
-
+            nickofolas, // Throw it in here a second time just to be safe
         ]
     }
 
